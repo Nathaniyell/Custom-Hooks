@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useCallback, useEffect, useState } from "react";
 import Tasks from "./components/Tasks/Tasks";
 import NewTask from "./components/NewTask/NewTask";
 import useHttp from "./hooks/use-http";
@@ -15,19 +14,16 @@ function App() {
     }
 
     setTasks(loadedTasks);
-  };
+  }
 
   const {
     isLoading,
     error,
     sendRequest: fetchTasks,
-  } = useHttp(
-    { url: "https://fetchmovies-udemy-default-rtdb.firebaseio.com/tasks.json" },
-    transformTasks
-  );
+  } = useHttp( );
 
   useEffect(() => {
-    fetchTasks();
+    fetchTasks( { url: "https://fetchmovies-udemy-default-rtdb.firebaseio.com/tasks.json" }, transformTasks);
   }, [fetchTasks]);
 
   const taskAddHandler = (task) => {
