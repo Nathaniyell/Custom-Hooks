@@ -4,11 +4,12 @@ import classes from './Tasks.module.css';
 
 const Tasks = (props) => {
   let taskList = <h2>No tasks found. Start adding some!</h2>;
+  const {items, onFetch, loading, error} = props
 
-  if (props.items.length > 0) {
+  if (items.length > 0) {
     taskList = (
       <ul>
-        {props.items.map((task) => (
+        {items.map((task) => (
           <TaskItem key={task.id}>{task.text}</TaskItem>
         ))}
       </ul>
@@ -17,11 +18,11 @@ const Tasks = (props) => {
 
   let content = taskList;
 
-  if (props.error) {
-    content = <button onClick={props.onFetch}>Try again</button>;
+  if (error) {
+    content = <button onClick={onFetch}>Try again</button>;
   }
 
-  if (props.loading) {
+  if (loading) {
     content = 'Loading tasks...';
   }
 
